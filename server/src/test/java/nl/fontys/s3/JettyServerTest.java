@@ -1,6 +1,6 @@
 package nl.fontys.s3;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -15,6 +15,6 @@ public class JettyServerTest
     @Test
     public void shouldAnswerWithTrue()
     {
-        assertTrue( true );
+        fail();
     }
 }
