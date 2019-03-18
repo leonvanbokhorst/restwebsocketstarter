@@ -1,4 +1,4 @@
-package nl.fontys.s3;
+package nl.fhict.s3;
 
 import com.google.gson.Gson;
 import javax.ws.rs.Consumes;
@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 @Path("/simple")
 public class SimpleRestEndpoint {
 
-    private final Gson gson;
     private static final Logger log = LoggerFactory.getLogger(SimpleRestEndpoint.class);
+    private final Gson gson;
 
     public SimpleRestEndpoint() {
         gson = new Gson();

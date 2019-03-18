@@ -1,4 +1,4 @@
-package nl.fontys.s3;
+package nl.fhict.s3;
 
 import static org.junit.Assert.fail;
 
