@@ -1,13 +1,13 @@
-package nl.fontys.s3;
+package nl.fhict.s3;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 /**
- * Unit test for simple App.
+ * Unit test for simple Main.
  */
-public class AppTest 
+public class MainTest
 {
     /**
      * Rigorous Test :-)

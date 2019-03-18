@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Path("/simple")
+@Path("/greeting")
 public class SimpleRestEndpoint {
 
     private static final Logger log = LoggerFactory.getLogger(SimpleRestEndpoint.class);
@@ -22,7 +22,7 @@ public class SimpleRestEndpoint {
         gson = new Gson();
     }
 
-    @Path("hello")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response Hello() {
@@ -32,7 +32,7 @@ public class SimpleRestEndpoint {
         return Response.status(200).entity(gson.toJson(myResponse)).build();
     }
 
-    @Path("hello/{greeting}")
+    @Path("/{greeting}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response Hello(@PathParam("greeting") String greeting) {
@@ -42,7 +42,7 @@ public class SimpleRestEndpoint {
         return Response.status(200).entity(gson.toJson(myResponse)).build();
     }
 
-    @Path("hello/pojo/{greeting}")
+    @Path("/pojo/{greeting}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response HelloPojo(@PathParam("greeting") String greeting) {
