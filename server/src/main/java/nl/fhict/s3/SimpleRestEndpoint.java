@@ -1,6 +1,7 @@
 package nl.fhict.s3;
 
 import com.google.gson.Gson;
+import java.util.HashMap;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,51 +17,48 @@ import org.slf4j.LoggerFactory;
 public class SimpleRestEndpoint {
 
     private static final Logger log = LoggerFactory.getLogger(SimpleRestEndpoint.class);
+    private static GreetingStore greetingStore = new GreetingStore(new HashMap<>());
     private final Gson gson;
 
     public SimpleRestEndpoint() {
         gson = new Gson();
     }
 
-    @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
-    @GET
-    public Response Hello() {
-        log.info("Hello called");
-        String myResponse = "Hello from " + SimpleRestEndpoint.class.getName();
-
-        return Response.status(200).entity(gson.toJson(myResponse)).build();
-    }
-
-    @Path("/{greeting}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @GET
-    public Response Hello(@PathParam("greeting") String greeting) {
-        log.info("Hello {greeting} called");
-        String myResponse = "Hello " + greeting;
-
-        return Response.status(200).entity(gson.toJson(myResponse)).build();
-    }
-
-    @Path("/pojo/{greeting}")
+    // region GET
+    @Path("/hello/{greeting}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response HelloPojo(@PathParam("greeting") String greeting) {
-        log.info("Hello POJO called");
-        Greeting myResponse = new Greeting("Hello " + greeting + " POJO", 50);
+        log.info("GET hello called");
+        Greeting myResponse = new Greeting("Hello from GET " + greeting, 50);
 
         return Response.status(200).entity(gson.toJson(myResponse)).build();
     }
 
-    // POST
+    // region GET
+    @Path("/all")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public Response getAllGreetings() {
+        log.info("GET all called");
+
+        return Response.status(200).entity(gson.toJson(greetingStore.getAll())).build();
+    }
+    // endregion
+
+    // region POST
     @POST
-    @Path("greeting")
+    @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addGreeting(Greeting greeting) {
-        log.info("Greeting POST called");
-        Greeting myResponse = new Greeting("Hello POST greeting " + greeting.getName(), 11111111);
+        log.info("POST add called");
+
+        greetingStore.addGreeting(greeting);
+        Greeting myResponse = new Greeting("Hello from POST " + greeting.getName(),
+            greeting.getAge());
 
         return Response.status(200).entity(gson.toJson(myResponse)).build();
     }
+    // endregion
 }

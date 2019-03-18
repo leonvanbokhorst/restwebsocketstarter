@@ -15,6 +15,19 @@ public class Main {
         if (greeting != null) {
             log.info(greeting.getName());
         }
+
+        greeting = client.getGreeting("kees");
+
+        if (greeting != null) {
+            log.info(greeting.getName());
+        }
+
+        greeting = client.postGreeting(new Greeting("Postman", 66));
+
+        if (greeting != null) {
+            log.info(greeting.getName());
+        }
+
     }
 }
 

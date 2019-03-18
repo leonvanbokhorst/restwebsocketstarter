@@ -1,9 +1,13 @@
 package nl.fhict.s3;
 
 import com.google.gson.Gson;
+import java.io.UnsupportedEncodingException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -19,24 +23,75 @@ class SimpleRestClient {
     }
 
     Greeting getGreeting(String greetingId) {
-        String queryGet = "/pojo/" + greetingId;
-        String query = url + queryGet;
+        final String queryGet = "/hello/" + greetingId;
+        final String query = url + queryGet;
+        log.info("GET: " + query);
+
         HttpGet httpGetQuery = new HttpGet(query);
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();
-            CloseableHttpResponse response = httpClient.execute(httpGetQuery)) {
-            log.info("[Status Line] : " + response.getStatusLine());
-            HttpEntity entity = response.getEntity();
-            final String entityString = EntityUtils.toString(entity);
-            log.info("[Entity] : " + entityString);
-            return gson.fromJson(entityString, Greeting.class);
+        return executeQuery(httpGetQuery);
+
+    }
+
+    Greeting postGreeting(Greeting greeting) {
+        final String queryPost = "/add/";
+        final String query = url + queryPost;
+        log.info("POST: " + query);
+
+        HttpPost httpPostQuery = new HttpPost(query);
+        httpPostQuery.addHeader("content-type", "application/json");
+
+        StringEntity params;
+
+        try {
+            params = new StringEntity(gson.toJson(greeting));
+            httpPostQuery.setEntity(params);
         } catch (Exception e) {
             log.error(e.toString());
         }
 
-        return null;
+        return executeQuery(httpPostQuery);
 
     }
+
+    private Greeting executeQuery(HttpRequestBase requestBaseQuery) {
+        Greeting greeting = null;
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse response = httpClient.execute(requestBaseQuery)) {
+            log.info("Status: " + response.getStatusLine());
+
+            HttpEntity entity = response.getEntity();
+            final String entityString = EntityUtils.toString(entity);
+            log.info("JSON entity: " + entityString);
+
+            greeting = gson.fromJson(entityString, Greeting.class);
+
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+
+        return greeting;
+    }
+
+//    private Greeting getGreeting(HttpGet httpGetQuery, Greeting greeting) {
+//        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+//
+//            CloseableHttpResponse response = httpClient.execute(httpGetQuery)) {
+//            log.info("[Status Line] : " + response.getStatusLine());
+//
+//            HttpEntity entity = response.getEntity();
+//            final String entityString = EntityUtils.toString(entity);
+//            log.info("[Entity] : " + entityString);
+//
+//            greeting = gson.fromJson(entityString, Greeting.class);
+//
+//        } catch (Exception e) {
+//            log.error(e.toString());
+//        }
+//
+//        return greeting;
+//    }
 
 //    /**
 //     * Get all pets in the pet store.
@@ -72,7 +127,7 @@ class SimpleRestClient {
 //        PetDTO petRequest = new PetDTO(NOTDEFINED,petName,ownerName);
 //        String queryPost = "/pet";
 //        PetStoreResponse response = executeQueryPost(petRequest,queryPost);
-//        return response.getPets().get(0);
+//        return response.getPets().getGreeting(0);
 //    }
 //
 //    /**
