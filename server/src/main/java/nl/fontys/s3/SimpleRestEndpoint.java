@@ -1,7 +1,9 @@
 package nl.fontys.s3;
 
 import com.google.gson.Gson;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -46,6 +48,18 @@ public class SimpleRestEndpoint {
     public Response HelloPojo(@PathParam("greeting") String greeting) {
         log.info("Hello POJO called");
         Greeting myResponse = new Greeting("Hello " + greeting + " POJO", 50);
+
+        return Response.status(200).entity(gson.toJson(myResponse)).build();
+    }
+
+    // POST
+    @POST
+    @Path("greeting")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addGreeting(Greeting greeting) {
+        log.info("Greeting POST called");
+        Greeting myResponse = new Greeting("Hello POST greeting " + greeting.getName(), 11111111);
 
         return Response.status(200).entity(gson.toJson(myResponse)).build();
     }

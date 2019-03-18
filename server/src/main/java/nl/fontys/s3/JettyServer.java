@@ -19,7 +19,7 @@ public class JettyServer {
 
     private static Handler getJerseyHandler() {
         ServletContextHandler handler = new ServletContextHandler(
-            ServletContextHandler.NO_SESSIONS);
+            ServletContextHandler.SESSIONS);
 
         handler.setContextPath("/");
 
