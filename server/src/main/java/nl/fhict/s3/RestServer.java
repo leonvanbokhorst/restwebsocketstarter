@@ -6,7 +6,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-public class JettyServer {
+public class RestServer {
 
     public static void main(String[] args) throws Exception {
         Server server = new Server(8080);

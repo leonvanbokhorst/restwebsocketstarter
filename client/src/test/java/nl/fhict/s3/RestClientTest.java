@@ -1,13 +1,13 @@
 package nl.fhict.s3;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 /**
- * Unit test for simple JettyServer.
+ * Unit test for simple RestClient.
  */
-public class JettyServerTest
+public class RestClientTest
 {
     /**
      * Rigorous Test :-)
@@ -15,6 +15,6 @@ public class JettyServerTest
     @Test
     public void shouldAnswerWithTrue()
     {
-        fail();
+        assertTrue( true );
     }
 }

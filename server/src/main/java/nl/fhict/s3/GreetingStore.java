@@ -2,14 +2,13 @@ package nl.fhict.s3;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.Set;
 
 class GreetingStore {
 
     private HashMap<String, Greeting> store;
+    private static GreetingStore instance;
 
-    GreetingStore(HashMap<String, Greeting> store) {
+    private GreetingStore(HashMap<String, Greeting> store) {
         this.store = store;
     }
 
@@ -17,7 +16,7 @@ class GreetingStore {
         store.put(greeting.getName(), greeting);
     }
 
-    public Greeting getGreeting(String key) {
+    Greeting getGreeting(String key) {
         return store.get(key);
     }
 
@@ -31,5 +30,12 @@ class GreetingStore {
 
     Collection<Greeting> getAll() {
         return store.values();
+    }
+
+    static GreetingStore getInstance() {
+        if (instance == null) {
+            instance = new GreetingStore(new HashMap<>());
+        }
+        return instance;
     }
 }

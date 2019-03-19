@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class SimpleRestEndpoint {
 
     private static final Logger log = LoggerFactory.getLogger(SimpleRestEndpoint.class);
-    private static GreetingStore greetingStore = new GreetingStore(new HashMap<>());
+    private static GreetingStore greetingStore = GreetingStore.getInstance();
     private final Gson gson;
 
     public SimpleRestEndpoint() {
@@ -25,12 +25,12 @@ public class SimpleRestEndpoint {
     }
 
     // region GET
-    @Path("/hello/{greeting}")
+    @Path("/{greeting}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public Response HelloPojo(@PathParam("greeting") String greeting) {
-        log.info("GET hello called");
-        Greeting myResponse = new Greeting("Hello from GET " + greeting, 50);
+    public Response getGreeting(@PathParam("greeting") String greeting) {
+        log.info("GET greeting called for key: {}", greeting);
+        Greeting myResponse = greetingStore.getGreeting(greeting);
 
         return Response.status(200).entity(gson.toJson(myResponse)).build();
     }
@@ -52,13 +52,11 @@ public class SimpleRestEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addGreeting(Greeting greeting) {
-        log.info("POST add called");
+        log.info("POST add called for key: {}", greeting.getName());
 
         greetingStore.addGreeting(greeting);
-        Greeting myResponse = new Greeting("Hello from POST " + greeting.getName(),
-            greeting.getAge());
 
-        return Response.status(200).entity(gson.toJson(myResponse)).build();
+        return Response.status(200).entity(gson.toJson(greeting)).build();
     }
     // endregion
 }
