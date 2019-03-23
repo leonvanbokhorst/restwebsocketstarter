@@ -1,0 +1,7 @@
+<component name="DependencyValidationManager">
+  <state>
+    <unnamed_scope value="file[client]:*/" />
+    <unnamed_scope value="file[jetty-starter]:pom.xml" />
+    <deny_rule from_scope="file[client]:*/" to_scope="file[jetty-starter]:pom.xml" is_deny="true" />
+  </state>
+</component>
