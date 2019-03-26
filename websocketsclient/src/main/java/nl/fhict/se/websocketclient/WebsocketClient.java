@@ -1,5 +1,5 @@
 package nl.fhict.se.websocketclient;
 
-public class Client {
+public class WebsocketClient {
 
 }

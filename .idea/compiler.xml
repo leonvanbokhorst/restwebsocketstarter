@@ -10,6 +10,7 @@
         <module name="restserver" />
         <module name="websocketserver" />
         <module name="restclient" />
+        <module name="websocketshared" />
       </profile>
     </annotationProcessing>
   </component>

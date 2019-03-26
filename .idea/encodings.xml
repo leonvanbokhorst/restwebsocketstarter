@@ -6,5 +6,6 @@
     <file url="file://$PROJECT_DIR$/restserver" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/websocketsclient" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/websocketserver" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/websocketshared" charset="UTF-8" />
   </component>
 </project>
