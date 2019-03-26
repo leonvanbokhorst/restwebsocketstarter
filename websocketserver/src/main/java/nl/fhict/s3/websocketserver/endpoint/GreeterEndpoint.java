@@ -1,4 +1,4 @@
-package nl.fhict.s3.websocketserver;
+package nl.fhict.s3.websocketserver.endpoint;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;

@@ -1,6 +1,7 @@
 package nl.fhict.s3.websocketserver;
 
 import javax.websocket.server.ServerContainer;
+import nl.fhict.s3.websocketserver.endpoint.GreeterEndpoint;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
