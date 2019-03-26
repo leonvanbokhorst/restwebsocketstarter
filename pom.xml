@@ -15,6 +15,7 @@
     <module>websocketserver</module>
     <module>websocketsclient</module>
     <module>websocketshared</module>
+    <module>restshared</module>
   </modules>
 
   <name>jetty-starter</name>

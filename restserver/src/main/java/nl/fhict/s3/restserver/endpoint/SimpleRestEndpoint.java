@@ -1,4 +1,4 @@
-package nl.fhict.s3.restserver;
+package nl.fhict.s3.restserver.endpoint;
 
 import com.google.gson.Gson;
 import javax.ws.rs.Consumes;
@@ -9,6 +9,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import nl.fhict.s3.restserver.data.GreetingStore;
+import nl.fhict.s3.restshared.Greeting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

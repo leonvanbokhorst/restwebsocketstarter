@@ -1,5 +1,6 @@
 package nl.fhict.s3.restserver;
 
+import nl.fhict.s3.restserver.endpoint.SimpleRestEndpoint;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;

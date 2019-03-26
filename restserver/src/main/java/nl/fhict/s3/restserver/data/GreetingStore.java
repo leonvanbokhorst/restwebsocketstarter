@@ -1,9 +1,10 @@
-package nl.fhict.s3.restserver;
+package nl.fhict.s3.restserver.data;
 
 import java.util.Collection;
 import java.util.HashMap;
+import nl.fhict.s3.restshared.Greeting;
 
-class GreetingStore {
+public class GreetingStore {
 
     private HashMap<String, Greeting> store;
     private static GreetingStore instance;
@@ -12,11 +13,11 @@ class GreetingStore {
         this.store = store;
     }
 
-    void addGreeting(Greeting greeting) {
+    public void addGreeting(Greeting greeting) {
         store.put(greeting.getName(), greeting);
     }
 
-    Greeting getGreeting(String key) {
+    public Greeting getGreeting(String key) {
         return store.get(key);
     }
 
@@ -28,11 +29,11 @@ class GreetingStore {
         store.replace(greeting.getName(), greeting);
     }
 
-    Collection<Greeting> getAll() {
+    public Collection<Greeting> getAll() {
         return store.values();
     }
 
-    static GreetingStore getInstance() {
+    public static GreetingStore getInstance() {
         if (instance == null) {
             instance = new GreetingStore(new HashMap<>());
         }

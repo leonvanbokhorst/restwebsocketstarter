@@ -1,7 +1,7 @@
 package nl.fhict.s3.restclient;
 
 import com.google.gson.Gson;
-import nl.fhict.s3.restclient.model.Greeting;
+import nl.fhict.s3.restshared.Greeting;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

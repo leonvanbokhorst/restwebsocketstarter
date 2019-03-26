@@ -1,4 +1,4 @@
-package nl.fhict.s3.restclient.model;
+package nl.fhict.s3.restshared;
 
 public class Greeting {
 
