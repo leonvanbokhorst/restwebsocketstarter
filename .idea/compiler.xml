@@ -6,8 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="client" />
-        <module name="server" />
+        <module name="websocketsclient" />
+        <module name="websocketserver" />
+        <module name="restclient" />
+        <module name="restserver" />
       </profile>
     </annotationProcessing>
   </component>
