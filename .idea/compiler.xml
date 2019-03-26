@@ -8,9 +8,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="websocketsclient" />
         <module name="restserver" />
-        <module name="websocketserver" />
         <module name="restclient" />
         <module name="websocketshared" />
+        <module name="websocketserver" />
         <module name="restshared" />
       </profile>
     </annotationProcessing>

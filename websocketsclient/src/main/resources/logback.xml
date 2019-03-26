@@ -1,7 +1,7 @@
 <configuration>
   <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-      <pattern>%date [%-16thread{16}] [%-5level] %-48logger{48} - %message%n</pattern>
+      <pattern>%date [%-30thread{30}] [%-5level] %-54logger{54} - %message%n</pattern>
     </encoder>
   </appender>
 

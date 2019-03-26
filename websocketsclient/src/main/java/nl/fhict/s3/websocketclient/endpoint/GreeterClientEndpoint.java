@@ -17,16 +17,19 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 import nl.fhict.s3.websocketshared.Greeting;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ClientEndpoint
 public class GreeterClientEndpoint extends Observable {
 
+    private static final Logger log = LoggerFactory.getLogger(GreeterClientEndpoint.class);
     private static GreeterClientEndpoint instance = null;
     private static final String URI = "ws://localhost:8095/greeter/";
     private Session session;
-    private String message;
     private Gson gson;
     private boolean isRunning = false;
+    private String message;
 
     private GreeterClientEndpoint() {
         gson = new Gson();
@@ -34,14 +37,13 @@ public class GreeterClientEndpoint extends Observable {
 
     public static GreeterClientEndpoint getInstance() {
         if (instance == null) {
-            System.out.println("[WebSocket Client create singleton instance]");
             instance = new GreeterClientEndpoint();
+            log.info("GreeterClientEndpoint singleton instantiated");
         }
         return instance;
     }
 
     public void start() {
-        System.out.println("[WebSocket Client start connection]");
         if (!isRunning) {
             startClient();
             isRunning = true;
@@ -49,7 +51,6 @@ public class GreeterClientEndpoint extends Observable {
     }
 
     public void stop() {
-        System.out.println("[WebSocket Client stop]");
         if (isRunning) {
             stopClient();
             isRunning = false;
@@ -58,78 +59,70 @@ public class GreeterClientEndpoint extends Observable {
 
     @OnOpen
     public void onWebSocketConnect(Session session) {
-        System.out.println("[WebSocket Client open session] " + session.getRequestURI());
+        log.info("Client open session {}", session.getRequestURI());
         this.session = session;
     }
 
     @OnMessage
     public void onWebSocketText(String message, Session session) {
         this.message = message;
-        System.out.println("[WebSocket Client message received] " + message);
+        log.info("Client message received {}", message);
         processMessage(message);
     }
 
     @OnError
     public void onWebSocketError(Session session, Throwable cause) {
-        System.out.println("[WebSocket Client connection error] " + cause.toString());
+        log.info("Client connection error {}", cause.toString());
     }
 
     @OnClose
     public void onWebSocketClose(CloseReason reason) {
-        System.out.print("[WebSocket Client close session] " + session.getRequestURI());
-        System.out.println(" for reason " + reason);
+        log.info("Client close session {} for reason {} ", session.getRequestURI(), reason);
         session = null;
     }
 
-    private void sendMessageToServer(Greeting message) {
+    public void sendMessageToServer(Greeting message) {
         String jsonMessage = gson.toJson(message);
+        log.info("Sending message to server: {}", message);
         session.getAsyncRemote().sendText(jsonMessage);
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     private void startClient() {
-        System.out.println("[WebSocket Client start]");
         try {
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
             container.connectToServer(this, new URI(URI));
+            log.info("Connected to server at {}", URI);
 
         } catch (IOException | URISyntaxException | DeploymentException ex) {
-            ex.printStackTrace();
+            log.error("Error in startClient: {}", ex.getMessage());
         }
     }
 
     private void stopClient() {
-        System.out.println("[WebSocket Client stop]");
         try {
             session.close();
+            log.info("Session closed");
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            log.error("Error in stopClient {}", ex.getMessage());
         }
     }
 
     private void processMessage(String jsonMessage) {
+        Greeting greeting;
+        log.info("Processing message: {}", jsonMessage);
 
-        // Parse incoming message
-        Greeting wsMessage;
         try {
-            wsMessage = gson.fromJson(jsonMessage, Greeting.class);
+            greeting = gson.fromJson(jsonMessage, Greeting.class);
+            log.info("Message processed: {}", greeting);
         } catch (JsonSyntaxException ex) {
-            System.out.println("[WebSocket Client ERROR: cannot parse Json message " + jsonMessage);
+            log.error("Can't process message: {}", ex.getMessage());
             return;
         }
 
-        // Obtain content from message
-        String content = wsMessage.getName();
+        String content = greeting.getName();
         if (content == null || "".equals(content)) {
-            System.out.println("[WebSocket Client ERROR: message without content]");
+            log.error("Message is empty");
             return;
         }
 

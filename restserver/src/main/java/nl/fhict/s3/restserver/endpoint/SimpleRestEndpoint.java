@@ -25,7 +25,6 @@ public class SimpleRestEndpoint {
         gson = new Gson();
     }
 
-    // region GET
     @Path("/{greeting}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
@@ -36,7 +35,6 @@ public class SimpleRestEndpoint {
         return Response.status(200).entity(gson.toJson(myResponse)).build();
     }
 
-    // region GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
@@ -45,9 +43,7 @@ public class SimpleRestEndpoint {
 
         return Response.status(200).entity(gson.toJson(greetingStore.getAll())).build();
     }
-    // endregion
 
-    // region POST
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -59,5 +55,4 @@ public class SimpleRestEndpoint {
 
         return Response.status(200).entity(gson.toJson(greeting)).build();
     }
-    // endregion
 }
