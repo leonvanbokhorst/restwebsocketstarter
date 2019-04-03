@@ -11,7 +11,7 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import nl.fhict.s3.websocketshared.Greeting;
+import nl.fhict.s3.sharedmodel.Greeting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

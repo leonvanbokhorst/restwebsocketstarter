@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="websocketsclient" />
-        <module name="restserver" />
-        <module name="restclient" />
-        <module name="websocketshared" />
+        <module name="sharedmodel" />
         <module name="websocketserver" />
-        <module name="restshared" />
+        <module name="restclient" />
+        <module name="restserver" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="websocketshared" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

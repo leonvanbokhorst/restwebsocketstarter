@@ -4,5 +4,5 @@ module restclient {
     requires slf4j.api;
     requires org.apache.httpcomponents.httpcore;
     requires java.sql;
-    requires restshared;
+    requires sharedmodel;
 }

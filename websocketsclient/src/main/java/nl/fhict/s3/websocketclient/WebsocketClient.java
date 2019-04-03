@@ -3,7 +3,7 @@ package nl.fhict.s3.websocketclient;
 import java.util.Observable;
 import java.util.Observer;
 import nl.fhict.s3.websocketclient.endpoint.GreeterClientEndpoint;
-import nl.fhict.s3.websocketshared.Greeting;
+import nl.fhict.s3.sharedmodel.Greeting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

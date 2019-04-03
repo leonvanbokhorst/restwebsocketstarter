@@ -33,7 +33,7 @@
 
     <dependency>
       <groupId>nl.fhict.s3</groupId>
-      <artifactId>websocketshared</artifactId>
+      <artifactId>sharedmodel</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

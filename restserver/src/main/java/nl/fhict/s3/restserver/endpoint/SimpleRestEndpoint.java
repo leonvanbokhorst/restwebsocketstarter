@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import nl.fhict.s3.restserver.data.GreetingStore;
-import nl.fhict.s3.restshared.Greeting;
+import nl.fhict.s3.sharedmodel.Greeting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

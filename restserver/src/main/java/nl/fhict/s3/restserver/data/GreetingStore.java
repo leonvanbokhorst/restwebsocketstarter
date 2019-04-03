@@ -2,7 +2,7 @@ package nl.fhict.s3.restserver.data;
 
 import java.util.Collection;
 import java.util.HashMap;
-import nl.fhict.s3.restshared.Greeting;
+import nl.fhict.s3.sharedmodel.Greeting;
 
 public class GreetingStore {
 
